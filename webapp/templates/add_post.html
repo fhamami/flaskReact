@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% from "_form_macros.html" import render_field %}
+
+{% block content %}
+
+<div class="add-recipe">
+
+    <div class="page-header">
+        <h2>Add a New Post</h2>
+    </div>
+
+    <form action="{{ url_for('post.add_post') }}" method="post">
+        {{ form.csrf_token }}
+        {{ form.post_title(placeholder="Post Title") }}
+        {{ form.post_description(placeholder="Post Description") }}
+
+        <button class="btn btn-sm btn-success" type="submit">Add Post</button>
+    </form>
+
+</div>
+
+{% endblock %}

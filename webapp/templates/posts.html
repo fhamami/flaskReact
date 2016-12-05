@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Welcome to the Flask React WebApp!</h1>
+
+<div class="row">
+  <div class="col-md-4">
+    <table class="table table-striped" id="owned_stock_table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for post in posts %}
+        <tr>
+            <td>{{ post.post_title }}</td>
+            <td>{{ post.post_description }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

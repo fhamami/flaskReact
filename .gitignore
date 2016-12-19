@@ -5,3 +5,8 @@ __pycache__/
 
 # PyCharm files
 .idea/
+
+HowTo.md
+db_create.py
+
+/venv

@@ -8,6 +8,7 @@ post_blueprint = Blueprint('post', __name__, template_folder='templates')
 
 
 @post_blueprint.route('/')
+@post_blueprint.route('/home')
 def index():
     all_post = Post.query.all()
     return render_template('posts.html', posts=all_post)

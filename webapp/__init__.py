@@ -10,6 +10,9 @@ app.config.from_pyfile('settings.cfg')
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
+from flask_wtf.csrf import CsrfProtect
+CsrfProtect(app)
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "users.login"

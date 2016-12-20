@@ -4,10 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Flask React WebApp</title>
     <!-- styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+
 
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
@@ -39,16 +42,48 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
+
             {% if current_user.is_authenticated %}
-            <li><a href="{{ url_for('users.logout') }}">Log Out</a></li>
+                <li><a>Welcome</a></li>
             {% else %}
-            <li><a href="{{ url_for('users.login') }}">Log In</a></li>
-            <li><a href="{{ url_for('users.register') }}">Register</a></li>
+            {% from "_form_macros.html" import render_field %}
+            <li class="dropdown" id="loginform">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+    			<ul id="login-dp" class="dropdown-menu">
+    				<li>
+    					 <div class="row">
+    							<div class="col-md-12">
+    								 <form class="form" role="form" method="post" accept-charset="UTF-8" id="login-nav">
+                                             {{ form.csrf_token }}
+                                             {{ render_field(form.email, placeholder="Email address") }}
+                                             {{ render_field(form.password, placeholder="Password") }}
+    										<div class="form-group">
+    											 <button id="submit-btn" type="submit" class="btn btn-primary btn-block">Log in</button>
+    										</div>
+    								 </form>
+    							</div>
+    							<div class="bottom text-center">
+    								New here ? <a href="{{ url_for('users.register') }}"><b>Join Us</b></a>
+    							</div>
+    					 </div>
+    				</li>
+    			</ul>
+            </li>
             {% endif %}
+            <span id="logout-section">
+                {% if session.get('username') %}
+                    <button id="logout">Logout</button>
+                {% endif %}
+            </span>
+
           </ul>
         </div><!--/.nav-collapse -->
       </div><!-- /.container -->
     </nav>
+
+    <div id="alert-section">
+        <!-- bootstrap alerts -->
+    </div>
 
     <div class="container">
       <div class="content">
@@ -78,6 +113,7 @@
     </div><!-- /.container -->
 
     <!-- scripts -->
+    <script src="{{ url_for('static', filename='js/ajax-test.js') }}"></script>
 
   </body>
 </html>
